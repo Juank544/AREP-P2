@@ -1,7 +1,9 @@
 package co.edu.escuelaing;
 
-import static spark.Spark.get;
-import static spark.Spark.port;
+import co.edu.escuelaing.services.MathService;
+import com.google.gson.JsonObject;
+
+import static spark.Spark.*;
 
 /**
  * Hello world!
@@ -11,10 +13,35 @@ import static spark.Spark.port;
  */
 public class App 
 {
+    static MathService mathService = new MathService();
+
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
         port(getport());
+        path("/api/v1", () -> {
+            get("/ln" , (request,response) -> {
+                response.type("application/json");
+                JsonObject json = new JsonObject();
+                Double value = Double.valueOf(request.queryParams("value"));
+
+                json.addProperty("operation", "ln");
+                json.addProperty("input", value);
+                json.addProperty("output", mathService.ln(value));
+
+                return json;
+            });
+            get("/acos", (request,response) -> {
+                response.type("application/json");
+                JsonObject json = new JsonObject();
+                Double value = Double.valueOf(request.queryParams("value"));
+
+                json.addProperty("operation", "acos");
+                json.addProperty("input", value);
+                json.addProperty("output", mathService.acos(value));
+
+                return json;
+            });
+        });
         get("/hello", (request,response) -> "Hello!");
     }
 
