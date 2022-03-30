@@ -28,3 +28,15 @@ Salida. El formato de la salida y la respuesta debe ser un JSON con el siguiente
 "output":  -0.999999
 
 }
+
+## Funcionamiento
+
+Probamos los endpoints de **ln** y **acos** de manera local y vemos su correcto funcionamiento
+
+* ln
+
+![](img/img_2.png)
+
+* acos
+
+![](img/img_1.png)
